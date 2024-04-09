@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: windows-latest  
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2.3.2
@@ -24,7 +24,7 @@ jobs:
   deploy:
     name: Deploy
     needs: build
-    runs-on: windows-latest 
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2.3.2
@@ -34,8 +34,10 @@ jobs:
           name: build
           path: build
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only hosting
+        run: |
+          # Log in to Firebase (replace 'YOUR_FIREBASE_TOKEN' with the actual token)
+          npx firebase login:ci --token $FIREBASE_TOKEN
+          # Deploy to Firebase Hosting
+          npx firebase deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
