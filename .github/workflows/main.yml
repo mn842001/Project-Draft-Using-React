@@ -34,10 +34,8 @@ jobs:
           name: build
           path: build
       - name: Deploy to Firebase
-        run: |
-          # Log in to Firebase (replace 'YOUR_FIREBASE_TOKEN' with the actual token)
-          npx firebase login:ci --token $FIREBASE_TOKEN
-          # Deploy to Firebase Hosting
-          npx firebase deploy --only hosting
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
