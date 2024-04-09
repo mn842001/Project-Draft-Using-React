@@ -1,1 +1,1 @@
-This is the second draft of the mighty FIELDWISE  project using React (cool stuff). 
+This is the second draft of the mighty FIELDWISE  project using React (cool stuff!). 
